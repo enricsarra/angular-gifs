@@ -13,6 +13,7 @@ export class GifsService {
   private apiKey     : string = `${environment.apiKeyGiphy}`;
   // private apiKey     : string = 'CtbSNZMFPFlbWl1x5KQjtqPOHnE1ema5';
   private servicioUrl: string = 'https://api.giphy.com/v1/gifs';
+  private servicioStickersUrl: string = 'https://api.giphy.com/v1/stickers';
   private _historial : string[] = [];
 
   public resultados: Gif[] = [];
@@ -49,7 +50,7 @@ export class GifsService {
 
     const params = new HttpParams()
           .set('api_key', this.apiKey)
-          .set('limit', '15')
+          .set('limit', '50')
           .set('q', query )
           .set ('lang','es');
 
@@ -61,5 +62,33 @@ export class GifsService {
 
   }
 
+  buscarStickers( query: string = '' ) {
+
+    query = query.trim().toLocaleLowerCase();
+    
+    if( !this._historial.includes( query ) ) {
+      this._historial.unshift( query );
+      this._historial = this._historial.splice(0,10);
+
+      localStorage.setItem('historial', JSON.stringify( this._historial )  );
+    }
+
+    const params = new HttpParams()
+          .set('api_key', this.apiKey)
+          .set('limit', '50')
+          .set('q', query )
+          .set ('lang','es');
+
+    this.http.get<SearchGifsResponse>(`${ this.servicioStickersUrl }/search`, { params } )
+      .subscribe( ( resp ) => {
+        this.resultados = resp.data;
+        localStorage.setItem('resultados', JSON.stringify( this.resultados )  );
+      });
+
+  }
+
+ 
+
 
 }
+

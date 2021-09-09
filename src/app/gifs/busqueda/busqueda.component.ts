@@ -14,19 +14,35 @@ export class BusquedaComponent {
   //https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator
   @ViewChild('txtBuscar') txtBuscar!:ElementRef<HTMLInputElement>;
 
+  @ViewChild('txtBuscarStickers') txtBuscarStickers!:ElementRef<HTMLInputElement>;
+
   constructor( private gifsService: GifsService ) {}
 
-  buscar() {
-    
+  buscarGifts() {
+   
     const valor = this.txtBuscar.nativeElement.value;
 
     if ( valor.trim().length === 0 ) {
       return;
     }
 
-    this.gifsService.buscarGifs( valor );
+    this.gifsService.buscarStickers( valor );
 
     this.txtBuscar.nativeElement.value = '';
   }
+
+  buscarStickers() {
+   
+    const valor = this.txtBuscarStickers.nativeElement.value;
+
+    if ( valor.trim().length === 0 ) {
+      return;
+    }
+
+    this.gifsService.buscarStickers( valor );
+
+    this.txtBuscarStickers.nativeElement.value = '';
+  }
+
 
 }

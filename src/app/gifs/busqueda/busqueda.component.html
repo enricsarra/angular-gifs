@@ -1,12 +1,23 @@
-<h5>Cercar:</h5>
+<!-- <h5>Cercar:</h5> -->
 
 <div class="d-flex ">
 
-    <input type="text" class="form-control" placeholder="Cercar gifs..." (keyup.enter)="buscar()" #txtBuscar>
+    <input type="text" class="form-control" placeholder="gifs..." (keyup.enter)="buscarGifts()" #txtBuscar>
 
 
 
-    <button (click)="buscar()" class="btn btn-outline-success ml-1" type="submit">Cercar</button>
+    <button (click)="buscarGifts()" class="btn btn-outline-success ml-1" type="submit">Cercar</button>
+
+
+</div>
+
+<div class="d-flex mt-1">
+
+    <input type="text" class="form-control" placeholder="stickers..." (keyup.enter)="buscarStickers()" #txtBuscarStickers>
+
+
+
+    <button (click)="buscarStickers()" class="btn btn-outline-success ml-1" type="submit">Cercar</button>
 
 
 </div>
